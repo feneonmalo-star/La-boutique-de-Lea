@@ -20,13 +20,13 @@ const HomePage = () => {
         <div className="relative max-w-[1400px] mx-auto px-6 md:px-12 w-full">
           <div className="max-w-2xl">
             <p className="text-xs uppercase tracking-[0.2em] font-medium text-muted-foreground mb-6" data-testid="hero-subtitle">
-              Beauté Naturelle & Luxueuse
+              La Boutique de Léa
             </p>
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.1] mb-6" data-testid="hero-title">
-              La Nature au Service de Votre Beauté
+              Beauté Naturelle & Artisanale
             </h1>
             <p className="text-lg md:text-xl font-light leading-relaxed mb-8 text-muted-foreground" data-testid="hero-description">
-              Découvrez notre collection de produits de beauté naturels, éthiques et luxueux.
+              Découvrez mes produits de beauté naturels, faits avec soin et passion pour sublimer votre peau.
             </p>
             <Link to="/products" data-testid="hero-cta">
               <Button
