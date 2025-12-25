@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
-            <h3 className="text-2xl font-heading font-medium mb-4">Lumière & Nature</h3>
+            <h3 className="text-2xl font-heading font-medium mb-4">La Boutique de Léa</h3>
             <p className="text-sm text-primary-foreground/80">
               Votre boutique de beauté naturelle et luxueuse.
             </p>
@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center text-sm text-primary-foreground/80">
-          <p>© 2024 Lumière & Nature. Tous droits réservés.</p>
+          <p>© 2024 La Boutique de Léa. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

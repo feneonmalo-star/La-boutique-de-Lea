@@ -24,7 +24,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="text-2xl font-heading font-medium tracking-tight text-primary" data-testid="header-logo">
-            Lumière & Nature
+            La Boutique de Léa
           </Link>
 
           {/* Desktop Navigation */}
