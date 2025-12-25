@@ -1,0 +1,194 @@
+{
+  "design_system": {
+    "identity": {
+      "name": "Lumière & Nature",
+      "archetype": "Organic & Earthy Luxury",
+      "tone": "Sophisticated, Calm, Pure, Expensive",
+      "vibe": "A sanctuary of beauty. Minimalist but warm. Clinical precision meets organic soul."
+    },
+    "typography": {
+      "font_family": {
+        "heading": "Playfair Display, serif",
+        "body": "Manrope, sans-serif",
+        "mono": "JetBrains Mono, monospace"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl font-medium tracking-tight leading-[1.1]",
+        "h2": "text-4xl md:text-5xl font-normal tracking-tight",
+        "h3": "text-2xl md:text-3xl font-normal",
+        "body_large": "text-lg md:text-xl font-light leading-relaxed",
+        "body_base": "text-base font-light leading-relaxed",
+        "caption": "text-xs uppercase tracking-[0.2em] font-medium text-muted-foreground"
+      },
+      "imports": [
+        "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');"
+      ]
+    },
+    "colors": {
+      "palette": {
+        "primary": {
+          "name": "Deep Forest",
+          "hsl": "160 40% 20%",
+          "hex": "#1E473B",
+          "usage": "Primary buttons, active states, strong branding"
+        },
+        "secondary": {
+          "name": "Antique Gold",
+          "hsl": "35 40% 50%",
+          "hex": "#B28E4B",
+          "usage": "Accents, highlights, premium badges"
+        },
+        "background": {
+          "name": "Warm Alabaster",
+          "hsl": "40 20% 98%",
+          "hex": "#FAF9F6",
+          "usage": "Main page background (never pure white)"
+        },
+        "surface": {
+          "name": "Pure White",
+          "hsl": "0 0% 100%",
+          "hex": "#FFFFFF",
+          "usage": "Cards, modals, dropdowns"
+        },
+        "text": {
+          "main": "hsl(160 30% 10%)",
+          "muted": "hsl(160 10% 40%)"
+        },
+        "border": {
+          "light": "hsl(160 10% 90%)"
+        }
+      },
+      "tailwind_config_extension": {
+        "colors": {
+          "border": "hsl(var(--border))",
+          "input": "hsl(var(--input))",
+          "ring": "hsl(var(--ring))",
+          "background": "hsl(var(--background))",
+          "foreground": "hsl(var(--foreground))",
+          "primary": {
+            "DEFAULT": "hsl(var(--primary))",
+            "foreground": "hsl(var(--primary-foreground))"
+          },
+          "secondary": {
+            "DEFAULT": "hsl(var(--secondary))",
+            "foreground": "hsl(var(--secondary-foreground))"
+          },
+          "destructive": {
+            "DEFAULT": "hsl(var(--destructive))",
+            "foreground": "hsl(var(--destructive-foreground))"
+          },
+          "muted": {
+            "DEFAULT": "hsl(var(--muted))",
+            "foreground": "hsl(var(--muted-foreground))"
+          },
+          "accent": {
+            "DEFAULT": "hsl(var(--accent))",
+            "foreground": "hsl(var(--accent-foreground))"
+          },
+          "popover": {
+            "DEFAULT": "hsl(var(--popover))",
+            "foreground": "hsl(var(--popover-foreground))"
+          },
+          "card": {
+            "DEFAULT": "hsl(var(--card))",
+            "foreground": "hsl(var(--card-foreground))"
+          }
+        }
+      }
+    },
+    "spacing": {
+      "container": "max-w-[1400px] mx-auto px-6 md:px-12",
+      "section_padding": "py-24 md:py-32",
+      "element_gap": "gap-8 md:gap-12"
+    },
+    "visual_enhancers": {
+      "radius": "0.25rem",
+      "shadows": {
+        "soft": "0 4px 20px -2px rgba(30, 71, 59, 0.05)",
+        "hover": "0 10px 40px -10px rgba(30, 71, 59, 0.1)"
+      },
+      "glassmorphism": {
+        "header": "bg-white/80 backdrop-blur-md border-b border-black/5",
+        "overlay": "bg-black/20 backdrop-blur-sm"
+      },
+      "animation": {
+        "fade_in": "animate-in fade-in duration-700 ease-out",
+        "slide_up": "animate-in slide-in-from-bottom-8 duration-700 ease-out",
+        "hover_lift": "transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      }
+    },
+    "layout_strategies": {
+      "marketing_grid": "Mode A: Tetris Grid (Asymmetrical, Artistic)",
+      "catalog_grid": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16",
+      "dashboard_grid": "Mode B: Control Room (Dense, Functional)"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 rounded-full font-medium tracking-wide transition-all duration-300",
+      "secondary": "bg-transparent border border-primary/20 text-primary hover:bg-primary/5 h-12 px-8 rounded-full font-medium tracking-wide transition-all duration-300",
+      "ghost": "hover:bg-accent hover:text-accent-foreground h-10 px-4 rounded-md"
+    },
+    "cards": {
+      "product": "group relative bg-transparent overflow-hidden",
+      "feature": "bg-surface p-8 md:p-12 border border-border/50 hover:border-primary/20 transition-colors duration-500"
+    },
+    "inputs": {
+      "default": "flex h-12 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_main": {
+        "url": "https://images.pexels.com/photos/3373716/pexels-photo-3373716.jpeg",
+        "alt": "Natural beauty portrait, clean skin, minimalist",
+        "category": "hero"
+      },
+      "product_collection_1": {
+        "url": "https://images.pexels.com/photos/4202325/pexels-photo-4202325.jpeg",
+        "alt": "Minimalist skincare bottles on stone",
+        "category": "product"
+      },
+      "product_collection_2": {
+        "url": "https://images.pexels.com/photos/8605776/pexels-photo-8605776.jpeg",
+        "alt": "Luxury cream jar texture",
+        "category": "product"
+      },
+      "lifestyle_1": {
+        "url": "https://images.unsplash.com/photo-1620334267407-30621bae1d7f",
+        "alt": "Woman natural portrait",
+        "category": "lifestyle"
+      },
+      "texture_bg": {
+        "url": "https://images.unsplash.com/photo-1613001889603-529ca3f302e4",
+        "alt": "Abstract texture or mood",
+        "category": "background"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 1.5px, elegant and thin"
+    }
+  },
+  "instructions_to_main_agent": {
+    "setup": [
+      "Install dependencies: yarn add lucide-react framer-motion clsx tailwind-merge @radix-ui/react-slot",
+      "Update tailwind.config.js with the provided colors and font families.",
+      "Add the Google Fonts import to index.css."
+    ],
+    "implementation_rules": [
+      "Use the 'Warm Alabaster' (hsl(40 20% 98%)) as the global body background, NOT white.",
+      "Headings MUST use 'Playfair Display'. Body MUST use 'Manrope'.",
+      "Do not use standard shadows. Use the custom 'soft' shadow defined in visual_enhancers.",
+      "For the Product Page: Use a split layout (Image Left 50%, Details Right 50%) with sticky scrolling for the details.",
+      "For the Navbar: Use the 'Glassmorphism' style defined above.",
+      "Ensure all interactive elements have data-testid attributes."
+    ],
+    "universal_guidelines": [
+      "Avoid gradients for backgrounds. Use solid colors or subtle noise textures.",
+      "Never center text in the Hero section unless it is a very short headline. Left align is safer for readability.",
+      "Use 2x more padding than you think is necessary. Luxury = Space.",
+      "Micro-interactions: Add hover states to everything. Images should zoom slightly (scale-105) on hover."
+    ]
+  }
+}
