@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { Search, ShoppingCart } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'sonner';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+import { fetchProductsFromCSV, getCategories } from '../utils/csvProducts';
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [categories, setCategories] = useState(['all']);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
   const { user } = useAuth();
-
-  const categories = ['all', 'Soin du visage', 'Soin du corps', 'Maquillage', 'Parfums'];
 
   useEffect(() => {
     fetchProducts();
@@ -33,9 +29,13 @@ const ProductsPage = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API}/products`);
-      setProducts(response.data);
-      setFilteredProducts(response.data);
+      const productsFromCSV = await fetchProductsFromCSV();
+      setProducts(productsFromCSV);
+      setFilteredProducts(productsFromCSV);
+      
+      // Get categories from products
+      const cats = getCategories(productsFromCSV);
+      setCategories(cats);
     } catch (error) {
       console.error('Error fetching products:', error);
       toast.error('Erreur lors du chargement des produits');
