@@ -131,14 +131,15 @@ const ProductDetailPage = () => {
               </div>
 
               <Button
-                onClick={handleAddToCart}
+                onClick={handleBuyProduct}
                 size="lg"
                 className="w-full rounded-full"
-                disabled={product.stock === 0}
-                data-testid="add-to-cart-button"
+                disabled={!product.payment_link || product.stock === 0}
+                variant={product.payment_link ? 'default' : 'secondary'}
+                data-testid="buy-button"
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                {product.stock === 0 ? 'Rupture de stock' : 'Ajouter au panier'}
+                {product.stock === 0 ? 'Rupture de stock' : product.payment_link ? 'Acheter maintenant' : 'Bientôt disponible'}
               </Button>
 
               {product.stock > 0 && product.stock < 10 && (
