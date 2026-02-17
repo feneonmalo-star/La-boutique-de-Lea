@@ -126,23 +126,32 @@ const ProductDetailPage = () => {
                 </Button>
               </div>
 
+              {/* Stock warning */}
+              {product.stock > 0 && product.stock <= 3 && (
+                <p className="text-sm text-red-600 font-medium mb-4" data-testid="low-stock-warning">
+                  🔥 Plus que {product.stock} en stock !
+                </p>
+              )}
+              
+              {product.stock > 3 && (
+                <p className="text-sm text-muted-foreground mb-4">En stock</p>
+              )}
+
               <Button
                 onClick={handleBuyProduct}
                 size="lg"
                 className="w-full rounded-full"
                 disabled={!product.payment_link || product.stock === 0}
-                variant={product.payment_link ? 'default' : 'secondary'}
+                variant={product.payment_link && product.stock > 0 ? 'default' : 'secondary'}
                 data-testid="buy-button"
               >
                 <ShoppingCart className="h-5 w-5 mr-2" />
-                {product.stock === 0 ? 'Rupture de stock' : product.payment_link ? 'Acheter maintenant' : 'Bientôt disponible'}
+                {product.stock === 0 
+                  ? 'Rupture de stock' 
+                  : product.payment_link 
+                  ? 'Acheter maintenant' 
+                  : 'Bientôt disponible'}
               </Button>
-
-              {product.stock > 0 && product.stock < 10 && (
-                <p className="text-sm text-muted-foreground mt-4" data-testid="stock-warning">
-                  Plus que {product.stock} en stock
-                </p>
-              )}
             </div>
           </div>
         </div>
