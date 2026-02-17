@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import { Search, ShoppingCart } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { useCart } from '../contexts/CartContext';
-import { useAuth } from '../contexts/AuthContext';
-import { toast } from 'sonner';
 import { fetchProductsFromCSV, getCategories } from '../utils/csvProducts';
 
 const ProductsPage = () => {
@@ -15,8 +12,6 @@ const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [categories, setCategories] = useState(['all']);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
-  const { user } = useAuth();
 
   useEffect(() => {
     fetchProducts();
