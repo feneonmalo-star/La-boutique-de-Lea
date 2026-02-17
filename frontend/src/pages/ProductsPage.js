@@ -146,7 +146,20 @@ const ProductsPage = () => {
                   <p className="text-sm text-muted-foreground line-clamp-2">
                     {product.description}
                   </p>
-                  <div className="flex items-center justify-between pt-2">
+                  
+                  {/* Stock status */}
+                  <div className="pt-2">
+                    {product.stock > 3 && (
+                      <p className="text-xs text-muted-foreground mb-1">En stock</p>
+                    )}
+                    {product.stock > 0 && product.stock <= 3 && (
+                      <p className="text-xs text-red-600 font-medium mb-1" data-testid={`low-stock-${product.id}`}>
+                        🔥 Plus que {product.stock} en stock !
+                      </p>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center justify-between pt-1">
                     <span className="text-2xl font-light" data-testid={`product-price-${product.id}`}>
                       {product.price.toFixed(2)}€
                     </span>
@@ -154,12 +167,16 @@ const ProductsPage = () => {
                       onClick={() => handleBuyProduct(product)}
                       size="sm"
                       className="rounded-full"
-                      disabled={!product.payment_link}
-                      variant={product.payment_link ? 'default' : 'secondary'}
+                      disabled={!product.payment_link || product.stock === 0}
+                      variant={product.payment_link && product.stock > 0 ? 'default' : 'secondary'}
                       data-testid={`buy-button-${product.id}`}
                     >
                       <ShoppingCart className="h-4 w-4 mr-2" />
-                      {product.payment_link ? 'Acheter' : 'Bientôt disponible'}
+                      {product.stock === 0 
+                        ? 'Rupture de stock' 
+                        : product.payment_link 
+                        ? 'Acheter' 
+                        : 'Bientôt disponible'}
                     </Button>
                   </div>
                 </div>
