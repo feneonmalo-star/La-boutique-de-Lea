@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { ShoppingCart, ArrowLeft, Minus, Plus } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'sonner';
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+import { fetchProductsFromCSV } from '../utils/csvProducts';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -26,11 +23,18 @@ const ProductDetailPage = () => {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API}/products/${id}`);
-      setProduct(response.data);
+      const products = await fetchProductsFromCSV();
+      const foundProduct = products.find(p => p.id === id);
+      
+      if (foundProduct) {
+        setProduct(foundProduct);
+      } else {
+        toast.error('Produit non trouvé');
+        navigate('/products');
+      }
     } catch (error) {
       console.error('Error fetching product:', error);
-      toast.error('Produit non trouvé');
+      toast.error('Erreur lors du chargement');
       navigate('/products');
     } finally {
       setLoading(false);
