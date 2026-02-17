@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, Menu, X } from 'lucide-react';
+import { User, Menu, X } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { useCart } from '../contexts/CartContext';
 import { Button } from './ui/button';
 
 const Header = () => {
   const { user, logout } = useAuth();
-  const { getCartCount } = useCart();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const cartCount = getCartCount();
 
   const handleLogout = () => {
     logout();
@@ -46,15 +42,6 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <Link to="/cart" className="relative" data-testid="cart-button">
-              <ShoppingBag className="h-5 w-5 text-foreground hover:text-primary transition-colors" />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center" data-testid="cart-count">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-
             {user ? (
               <div className="hidden md:flex items-center gap-4">
                 <span className="text-sm" data-testid="user-name">Bonjour, {user.name}</span>
