@@ -156,13 +156,15 @@ const ProductsPage = () => {
                       {product.price.toFixed(2)}€
                     </span>
                     <Button
-                      onClick={() => handleAddToCart(product.id)}
+                      onClick={() => handleBuyProduct(product)}
                       size="sm"
                       className="rounded-full"
-                      data-testid={`add-to-cart-${product.id}`}
+                      disabled={!product.payment_link}
+                      variant={product.payment_link ? 'default' : 'secondary'}
+                      data-testid={`buy-button-${product.id}`}
                     >
                       <ShoppingCart className="h-4 w-4 mr-2" />
-                      Ajouter
+                      {product.payment_link ? 'Acheter' : 'Bientôt disponible'}
                     </Button>
                   </div>
                 </div>
