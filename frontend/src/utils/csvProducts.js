@@ -52,6 +52,9 @@ function convertProduct(csvProduct) {
   // Parse stock
   const stock = parseInt(csvProduct.Stock || csvProduct['Stock ']) || 0;
   
+  // Get payment link
+  const paymentLink = (csvProduct.LienPaiement || '').trim();
+  
   return {
     id: csvProduct.ID || '',
     name: csvProduct.Nom || '',
@@ -60,6 +63,7 @@ function convertProduct(csvProduct) {
     image_url: csvProduct.ImageURL || '',
     category: (csvProduct.Catégorie || csvProduct['Catégorie ']).trim(),
     stock: stock,
+    payment_link: paymentLink,
     created_at: new Date().toISOString()
   };
 }
