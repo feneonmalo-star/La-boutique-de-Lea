@@ -176,6 +176,10 @@
             cursor: not-allowed;
         }
 
+        .btn:disabled:hover {
+            transform: none;
+        }
+
         /* Main Content */
         .container {
             max-width: 1400px;
@@ -260,6 +264,7 @@
         .product-card {
             background: transparent;
             transition: transform 0.3s;
+            cursor: pointer;
         }
 
         .product-card:hover {
@@ -339,6 +344,142 @@
         .btn-small {
             padding: 0.5rem 1rem;
             font-size: 0.875rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: var(--muted);
+            transform: rotate(90deg);
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .modal-image {
+            position: relative;
+            aspect-ratio: 3/4;
+            background: var(--muted);
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--muted-foreground);
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+        }
+
+        .modal-price {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .modal-stock {
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-large {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            justify-content: center;
         }
 
         /* Footer */
@@ -429,6 +570,27 @@
             .nav-links {
                 display: none;
             }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-image {
+                aspect-ratio: 4/3;
+            }
+
+            .modal-details {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+            }
+
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+            }
         }
 
         /* Icons */
@@ -498,6 +660,35 @@
         <div class="products-grid" id="productsGrid"></div>
     </section>
 
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="">
+                </div>
+                <div class="modal-details">
+                    <div class="modal-category" id="modalCategory"></div>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <p class="modal-description" id="modalDescription"></p>
+                    <div class="modal-stock" id="modalStock"></div>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <button class="btn btn-large" id="modalBuyButton">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <span id="modalButtonText">Acheter</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -525,6 +716,7 @@
         let allProducts = [];
         let filteredProducts = [];
         let selectedCategory = 'all';
+        let currentProduct = null;
 
         // Parse CSV
         function parseCSV(csvText) {
@@ -670,12 +862,11 @@
 
             noProducts.style.display = 'none';
             
-            grid.innerHTML = filteredProducts.map(product => {
+            grid.innerHTML = filteredProducts.map((product, index) => {
                 const stockIndicator = getStockIndicator(product.stock);
-                const buttonState = getButtonState(product);
 
                 return `
-                    <div class="product-card">
+                    <div class="product-card" onclick="openModalById(${index})">
                         <div class="product-image">
                             <img src="${product.image_url}" alt="${product.name}">
                         </div>
@@ -687,14 +878,6 @@
                         </div>
                         <div class="product-footer">
                             <span class="product-price">${product.price.toFixed(2)}€</span>
-                            <button class="btn btn-small ${buttonState.class}" 
-                                    ${buttonState.disabled ? 'disabled' : ''}
-                                    onclick="buyProduct('${product.payment_link}')">
-                                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                                ${buttonState.text}
-                            </button>
                         </div>
                     </div>
                 `;
@@ -711,30 +894,78 @@
             return { text: '', class: '' };
         }
 
-        // Get button state
-        function getButtonState(product) {
+        // Open modal by index
+        function openModalById(index) {
+            const product = filteredProducts[index];
+            if (!product) return;
+            openModal(product);
+        }
+
+        // Open modal
+        function openModal(product) {
+            currentProduct = product;
+            const modal = document.getElementById('modalOverlay');
+            
+            // Update modal content
+            document.getElementById('modalImage').src = product.image_url;
+            document.getElementById('modalImage').alt = product.name;
+            document.getElementById('modalCategory').textContent = product.category;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalPrice').textContent = `${product.price.toFixed(2)}€`;
+            
+            // Update stock indicator
+            const stockIndicator = getStockIndicator(product.stock);
+            const modalStock = document.getElementById('modalStock');
+            modalStock.innerHTML = `<span class="${stockIndicator.class}">${stockIndicator.text}</span>`;
+            
+            // Update button
+            const buyButton = document.getElementById('modalBuyButton');
+            const buttonText = document.getElementById('modalButtonText');
+            
             if (product.stock === 0) {
-                return {
-                    text: 'Rupture de stock',
-                    disabled: true,
-                    class: 'btn-secondary'
-                };
+                buttonText.textContent = 'Rupture de stock';
+                buyButton.disabled = true;
+                buyButton.classList.add('btn-secondary');
+                buyButton.onclick = null;
+            } else if (!product.payment_link) {
+                buttonText.textContent = 'Bientôt disponible';
+                buyButton.disabled = true;
+                buyButton.classList.add('btn-secondary');
+                buyButton.onclick = null;
+            } else {
+                buttonText.textContent = 'Acheter maintenant';
+                buyButton.disabled = false;
+                buyButton.classList.remove('btn-secondary');
+                buyButton.onclick = () => buyProduct(product.payment_link);
             }
             
-            if (!product.payment_link) {
-                return {
-                    text: 'Bientôt disponible',
-                    disabled: true,
-                    class: 'btn-secondary'
-                };
-            }
-
-            return {
-                text: 'Acheter',
-                disabled: false,
-                class: ''
-            };
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('modalOverlay');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            currentProduct = null;
+        }
+
+        // Close modal on overlay click
+        function closeModalOnOverlay(event) {
+            if (event.target.id === 'modalOverlay') {
+                closeModal();
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && currentProduct) {
+                closeModal();
+            }
+        });
 
         // Buy product
         function buyProduct(paymentLink) {
