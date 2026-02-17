@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ArrowLeft, Minus, Plus } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { useCart } from '../contexts/CartContext';
-import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'sonner';
 import { fetchProductsFromCSV } from '../utils/csvProducts';
 
@@ -13,8 +11,6 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
-  const { addToCart } = useCart();
-  const { user } = useAuth();
 
   useEffect(() => {
     fetchProduct();
