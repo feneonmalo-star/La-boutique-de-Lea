@@ -61,17 +61,10 @@ const ProductsPage = () => {
     setFilteredProducts(filtered);
   };
 
-  const handleAddToCart = async (productId) => {
-    if (!user) {
-      toast.error('Veuillez vous connecter pour ajouter des produits au panier');
-      return;
-    }
-
-    try {
-      await addToCart(productId, 1);
-      toast.success('Produit ajouté au panier');
-    } catch (error) {
-      toast.error('Erreur lors de l\'ajout au panier');
+  const handleBuyProduct = (product) => {
+    if (product.payment_link) {
+      // Open payment link in new tab
+      window.open(product.payment_link, '_blank');
     }
   };
 
