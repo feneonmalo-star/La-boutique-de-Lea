@@ -171,43 +171,5 @@
                 person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
             });
         </script>
-        <h1>TEST AFFICHAGE BOUTIQUE</h1>
-        <div id="boutique-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 20px;">
-  </div>
-
-<script>
-  const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTCngYZIM0JKHX3GItiN3N8Xo9-K7jBPsg9Z8udpyBLSdzkShRpz-df6Q8lHKFZBtJsVZhQn6F0jBBy/pub?gid=0&single=true&output=csv"; // <--- METS TON LIEN ICI
-
-  async function chargerProduits() {
-    const response = await fetch(urlCSV);
-    const data = await response.text();
-    const lignes = data.split("\n").slice(1); // On ignore la première ligne (titres)
-    const container = document.getElementById("boutique-container");
-
-    lignes.forEach(ligne => {
-      const colonnes = ligne.split(",");
-      if (colonnes.length < 2) return; // Ignore les lignes vides
-
-      // On récupère tes colonnes dans l'ordre : ID, Nom, Description, Prix, Stock, ImageURL, Catégorie
-      const [id, nom, desc, prix, stock, image, cat] = colonnes;
-
-      const card = `
-        <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden; font-family: sans-serif; text-align: center; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-          <img src="${image}" alt="${nom}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
-          <h3 style="margin: 10px 0;">${nom}</h3>
-          <p style="color: #666; font-size: 0.9em;">${desc}</p>
-          <p style="font-weight: bold; color: #2c3e50;">${prix} €</p>
-          <p style="font-size: 0.8em; color: ${stock > 0 ? 'green' : 'red'};">
-            ${stock > 0 ? 'En stock' : 'Rupture de stock'}
-          </p>
-          <button style="background: #000; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%;">Acheter</button>
-        </div>
-      `;
-      container.innerHTML += card;
-    });
-  }
-
-  chargerProduits();
-</script>
     </body>
 </html>
